@@ -1,3 +1,4 @@
 Hello, World!
 New line of text
 third line of text
+Line added in rebase branch
