@@ -7,8 +7,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install dependencies
-        working-directory: td5/scripts/sample-app
+        working-directory: sample-app
         run: npm install express jest supertest
       - name: Run tests
-        working-directory: td5/scripts/sample-app
+        working-directory: sample-app
         run: npm test
