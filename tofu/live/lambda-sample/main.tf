@@ -14,10 +14,9 @@ module "function" {
   handler = "index.handler"       
   # ... reste des paramètres ...
 }
-
 module "gateway" {
-  # Correction : Le chemin correct est modules/api-gateway
-  source = "github.com/brikis98/devops-book//modules/api-gateway?ref=v0.0.1"
+  # Ce lien pointe vers le dépôt brikis98, puis descend dans le dossier ch3
+  source = "github.com/brikis98/devops-book//ch3/tofu/modules/api-gateway"
 
   name               = var.name
   function_arn       = module.function.function_arn
