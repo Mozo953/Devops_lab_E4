@@ -16,7 +16,7 @@ module "function" {
 }
 
 module "gateway" {
-  # Correction du chemin vers le sous-répertoire correct du dépôt GitHub
+  # Correction : Le chemin correct est modules/api-gateway
   source = "github.com/brikis98/devops-book//modules/api-gateway?ref=v0.0.1"
 
   name               = var.name
