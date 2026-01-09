@@ -1,5 +1,5 @@
 variable "name" {
-  description = "The base name for the function and all other resources"
+  description = "Le nom utilisé pour toutes les ressources"
   type        = string
   default     = "lambda-sample"
 }

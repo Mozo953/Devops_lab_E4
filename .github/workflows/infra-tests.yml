@@ -1,0 +1,40 @@
+name: Infrastructure Tests
+
+on:
+  push:
+    branches:
+      - main
+      - opentofu-tests # Ajoute ta branche de travail ici
+
+jobs:
+  opentofu_test:
+    name: "Run OpenTofu tests"
+    runs-on: ubuntu-latest
+    
+    permissions:
+      id-token: write
+      contents: read
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          # Utilisation du secret configuré à l'étape précédente
+          role-to-assume: ${{ secrets.AWS_ROLE_FOR_TESTING }}
+          role-session-name: tests-${{ github.run_number }}-${{ github.actor }}
+          aws-region: us-east-1 # Vérifie si c'est us-east-1 ou us-east-2 pour toi
+
+      - name: Setup OpenTofu
+        uses: opentofu/setup-opentofu@v1
+
+      - name: Tofu Test
+        env:
+          # Utilisation de var.name dynamique pour éviter les collisions
+          TF_VAR_name: lambda-sample-${{ github.run_id }}
+        working-directory: td5/scripts/tofu/live/lambda-sample
+        run: |
+          tofu init -backend=false -input=false
+          tofu test -verbose
