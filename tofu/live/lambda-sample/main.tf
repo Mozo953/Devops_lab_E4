@@ -16,10 +16,10 @@ module "function" {
 }
 
 module "gateway" {
-  source = "github.com/brikis98/devops-book//ch3/tofu/modules/api-gateway"
+  # Correction du chemin vers le sous-répertoire correct du dépôt GitHub
+  source = "github.com/brikis98/devops-book//modules/api-gateway?ref=v0.0.1"
 
-  # CHANGEMENT ICI : On utilise aussi la variable ici
-  name               = var.name              
-  function_arn       = module.function.function_arn 
-  api_gateway_routes = ["GET /"]                    
+  name               = var.name
+  function_arn       = module.function.function_arn
+  api_gateway_routes = ["GET /"]
 }
